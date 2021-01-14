@@ -22,7 +22,7 @@ PLAYER_X = 0
 PLAYER_Y = 0
 #Loop until the user clicks the close button.
 DONE = False
- 
+MOVEABLE = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
  
@@ -33,13 +33,13 @@ while not DONE:
         if event.type == pygame.QUIT: # If user clicked close
             DONE = True # Flag that we are DONE so we exit this loop
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+            if (event.key == pygame.K_s or event.key == pygame.K_DOWN) and MOVEABLE == True:
                 PLAYER_Y = PLAYER_Y + 50
-            elif event.key == pygame.K_w or event.key == pygame.K_UP:
+            elif (event.key == pygame.K_w or event.key == pygame.K_UP) and MOVEABLE == True:
                 PLAYER_Y = PLAYER_Y - 50
-            elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+            elif (event.key == pygame.K_a or event.key == pygame.K_LEFT) and MOVEABLE == True:
                 PLAYER_X = PLAYER_X - 50
-            elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+            elif (event.key == pygame.K_d or event.key == pygame.K_RIGHT) and MOVEABLE == True:
                 PLAYER_X = PLAYER_X + 50
             print(PLAYER_X, PLAYER_Y)
     # --- Game logic should go here
