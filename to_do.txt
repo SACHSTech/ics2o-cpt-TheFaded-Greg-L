@@ -1,0 +1,29 @@
+Goals
+1. Program working character with movement - done
+
+2. Program virus that tries to go to player - done
+
+3. Advanced virus that will move around structures to reach player - w i p
+
+4. health system - done
+
+5. exit goal - done
+
+6. Level Layout using list function
+-- x = walls
+-- o = empty space
+-- p = player
+-- v = virus
+-- e = exit
+-- h = heart
+
+7. collision with walls
+
+8. collision with other objects - done
+9. menu
+
+10. kill effect
+
+11. end screen
+
+12. Make the game not look horrible
