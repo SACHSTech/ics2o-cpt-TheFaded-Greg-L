@@ -19,11 +19,14 @@ Goals
 
 7. collision with walls
 
-8. collision with other objects - done
-9. menu
+8. collision with borders
 
-10. kill effect
+9. collision with other objects - done
 
-11. end screen
+10. menu
 
-12. Make the game not look horrible
+11. kill effect
+
+12. end screen
+
+13. Make the game not look horrible
