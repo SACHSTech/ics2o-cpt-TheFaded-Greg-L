@@ -4,6 +4,7 @@ Goals
 2. Program virus that tries to go to player - done
 
 3. Advanced virus that will move around structures to reach player - w i p
+    - needs further testing
 
 4. health system - done
 
@@ -17,9 +18,11 @@ Goals
 -- e = exit
 -- h = heart
 
-7. collision with walls
+7. collision with walls - done
+    - needs to be able to be repeatable
 
-8. collision with borders
+8. collision with borders - done
+    - corners are buggy players can move up and down if positioned in a corner
 
 9. collision with other objects - done
 
