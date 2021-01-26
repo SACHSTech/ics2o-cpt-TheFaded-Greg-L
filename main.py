@@ -1,7 +1,3 @@
-""" 
-A basic pygame template
-"""
- 
 import pygame
 import random
 # Define some colors
@@ -47,12 +43,15 @@ VIRUS_RIGHT = True
 
 EXIT_POS = [2 * UNIT_OF_MEASUREMENT, 16 * UNIT_OF_MEASUREMENT]
 
-LEVEL = 1
+LEVEL = 0
 level_font = pygame.font.SysFont("Arial", 20, True)
 
-MOUSE_POS = pygame.mouse.get_pos
 
+SCENE = 0
 MENU_SCENE = 1
+
+BACK_BUTTON_POS = [725, 25]
+BACK_BUTTON_SIZE = [100, 50]
 
 START_BUTTON_POS = [150, 300]
 START_BUTTON_SIZE = [250, 100]
@@ -62,6 +61,9 @@ HELP_BUTTON_SIZE = [250, 100]
 
 COLOUR_SELECTION_BUTTON_POS = [100, 600]
 COLOUR_SELECTION_BUTTON_SIZE = [250, 100]
+
+PLAYER_COLOUR_PRIMARY = RED
+PLAYER_COLOUR_SECONDARY = LIGHT_GREY
 
 heart = pygame.image.load("images/heart.png").convert_alpha()
 heart = pygame.transform.scale(heart, (UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT))
@@ -78,20 +80,44 @@ clock = pygame.time.Clock()
  
 # -------- Main Program Loop -----------
 while not DONE:
+    MOUSE_POS = pygame.mouse.get_pos()
     screen.fill(WHITE)
-    # --- Main event loop
+    # --- Main event loop   
     for event in pygame.event.get(): # User did something
 
         if event.type == pygame.QUIT: # If user clicked close
             DONE = True # Flag that we are DONE so we exit this loop
 
-        elif event.type == pygame.KEYDOWN:
-            if LEVEL == 0 and MENU_SCENE == 1:
-                if event.type == pygame.MOUSEBUTTONUP:
-                    if MOUSE_POS[0] > START_BUTTON_POS[0] and MOUSE_POS[0] < START_BUTTON_POS[0] + START_BUTTON_SIZE[0] and MOUSE_POS[1] > START_BUTTON_POS[1] and START_BUTTON_POS[1] + START_BUTTON_SIZE[1]:
-                        LEVEL = 1
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            print(MOUSE_POS[0], MOUSE_POS[1], MENU_SCENE)
+            
+            #Menu
+            if SCENE == 0 and MENU_SCENE == 1:
 
-            if LEVEL != 0:
+                #Start Button
+                if MOUSE_POS[0] > START_BUTTON_POS[0] and MOUSE_POS[0] < START_BUTTON_POS[0] + START_BUTTON_SIZE[0] and MOUSE_POS[1] > START_BUTTON_POS[1] and MOUSE_POS[1] < START_BUTTON_POS[1] + START_BUTTON_SIZE[1]:
+                    SCENE = 1
+
+                #Help Button
+                elif MOUSE_POS[0] > HELP_BUTTON_POS[0] and MOUSE_POS[0] < HELP_BUTTON_POS[0] + HELP_BUTTON_SIZE[0] and MOUSE_POS[1] > HELP_BUTTON_POS[1] and MOUSE_POS[1] < HELP_BUTTON_POS[1] + HELP_BUTTON_SIZE[1]:
+                    MENU_SCENE = 2
+
+                #Colour Selection
+                elif MOUSE_POS[0] > COLOUR_SELECTION_BUTTON_POS[0] and MOUSE_POS[0] < COLOUR_SELECTION_BUTTON_POS[0] + COLOUR_SELECTION_BUTTON_SIZE[0] and MOUSE_POS[1] > COLOUR_SELECTION_BUTTON_POS[1] and MOUSE_POS[1] < COLOUR_SELECTION_BUTTON_POS[1] + COLOUR_SELECTION_BUTTON_SIZE[1]:
+                    MENU_SCENE = 3
+
+                #Go Back Button
+            elif SCENE == 0 and MENU_SCENE != 1:
+                if MOUSE_POS[0] > BACK_BUTTON_POS[0] and MOUSE_POS[0] < BACK_BUTTON_POS[0] + BACK_BUTTON_SIZE[0] and MOUSE_POS[1] > BACK_BUTTON_POS[1] and MOUSE_POS[1] < BACK_BUTTON_POS[1] + BACK_BUTTON_SIZE[1]:
+                    MENU_SCENE = 1
+
+        elif event.type == pygame.KEYDOWN:
+
+            #Always go back to main menu
+            if event.key == pygame.K_ESCAPE:
+                SCENE = 0
+                MENU_SCENE = 1
+            if SCENE != 0:
                 if (event.key == pygame.K_s or event.key == pygame.K_DOWN) and MOVEABLE_DOWN == True:
                     PLAYER_POS[1] = PLAYER_POS[1] + UNIT_OF_MEASUREMENT
                     PLAYER_MOVED = True
@@ -109,12 +135,16 @@ while not DONE:
                     PLAYER_MOVED = True
 
     # --- Game logic should go here
-    if LEVEL == 0 and MENU_SCENE == 1:
+
+    #Menu
+    if SCENE == 0 and MENU_SCENE == 1:
         pygame.draw.rect(screen, RED, ((START_BUTTON_POS), (START_BUTTON_SIZE)))
         pygame.draw.rect(screen, RED, ((HELP_BUTTON_POS), (HELP_BUTTON_SIZE)))
         pygame.draw.rect(screen, RED, ((COLOUR_SELECTION_BUTTON_POS), (COLOUR_SELECTION_BUTTON_SIZE)))
+    if SCENE == 0 and MENU_SCENE != 1:
+        pygame.draw.rect(screen, RED, ((BACK_BUTTON_POS), (BACK_BUTTON_SIZE)))
 
-    if LEVEL != 0:
+    if SCENE != 0:
         if PLAYER_MOVED is True:
             if VIRUS_UP is True and VIRUS_POS[1] > PLAYER_POS[1]:
                 VIRUS_POS[1] = VIRUS_POS[1] - UNIT_OF_MEASUREMENT
@@ -220,8 +250,8 @@ while not DONE:
         screen.blit(heart, (HEART_POS))
 
     # Draw player
-        pygame.draw.rect(screen, RED, (PLAYER_POS, [UNIT_OF_MEASUREMENT,UNIT_OF_MEASUREMENT]))
-        pygame.draw.rect(screen, LIGHT_GREY, (PLAYER_POS, [UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT]), 2)
+        pygame.draw.rect(screen, PLAYER_COLOUR_PRIMARY, (PLAYER_POS, [UNIT_OF_MEASUREMENT,UNIT_OF_MEASUREMENT]))
+        pygame.draw.rect(screen, PLAYER_COLOUR_SECONDARY, (PLAYER_POS, [UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT]), 2)
     
     # Draw virus
         screen.blit(virus, (VIRUS_POS))    
