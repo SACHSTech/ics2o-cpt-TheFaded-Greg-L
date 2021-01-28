@@ -5,12 +5,13 @@ Goals
 
 3. Advanced virus that will move around structures to reach player - w i p
     - needs further testing
+    - virus will always try to move down until same y value as player even if there is a block in the way it will not move at all.
 
 4. health system - done
 
 5. exit goal - done
 
-6. Level Layout using list function
+6. Level Layout using list function - done
 -- x = walls
 -- o = empty space
 -- p = player
@@ -19,19 +20,17 @@ Goals
 -- h = heart
 
 7. collision with walls - done
-    - needs to be able to be repeatable
+    - needs to be able to be repeatable - done and surprisingly easy
 
 8. collision with borders - done
     - corners are buggy players can move up and down if positioned in a corner -- FIXED
 
 9. collision with other objects - done
 
-10. menu 4/5  done
-    - colour changer needs to be added
-    - text for the help page needs to be added - done
+10. menu - done
 
-11. kill effect
+11. kill effect - unneeded maybe in the future for fun
 
-12. end screen
+12. end screen - not added since amount of levels could be infinite
 
-13. Make the game not look horrible
+13. Make the game not look horrible - well...
