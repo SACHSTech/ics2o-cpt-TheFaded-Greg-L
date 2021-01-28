@@ -230,6 +230,7 @@ START_BUTTON_FONT = pygame.font.SysFont("Aharoni", 60, False, False)
 START_BUTTON_TEXT = START_BUTTON_FONT.render("START", True, START_BUTTON_TEXT_COLOUR)
 
 #HELP MENU
+#BUTTON
 HELP_BUTTON_POS = [500, 550]
 HELP_BUTTON_SIZE = [250, 100]
 HELP_BUTTON_COLOUR = DARK_RED
@@ -237,6 +238,7 @@ HELP_BUTTON_TEXT_COLOUR = OFF_WHITE
 HELP_BUTTON_FONT = pygame.font.SysFont("Aharoni", 60, False, False)
 HELP_BUTTON_TEXT = HELP_BUTTON_FONT.render("HELP", True, HELP_BUTTON_TEXT_COLOUR)
 
+#WASD 
 HELP_FONT = pygame.font.SysFont("Arial", 30, True)
 HELP_KEY_TEXT_W = HELP_FONT.render("W", True, BLACK)
 HELP_KEY_TEXT_A = HELP_FONT.render("A", True, BLACK)
@@ -245,18 +247,19 @@ HELP_KEY_TEXT_D = HELP_FONT.render("D", True, BLACK)
 KEY_LOCATION_X = 550
 KEY_LOCATION_Y = 325
 
+#HELP PAGE TEXT
 HELP_TEXT_1 = HELP_FONT.render("Use  W  A  S  D  To  Move", True, BLACK)
 HELP_TEXT_2 = HELP_FONT.render("Or The Arrow Keys", True, BLACK)
 HELP_TEXT_3 = HELP_FONT.render("The Virus Will Move When You Move.", True, BLACK)
 HELP_TEXT_4 = HELP_FONT.render("Reach The Goal First Before", True, BLACK)
 HELP_TEXT_5 = HELP_FONT.render("The Virus Catches You!", True, BLACK)
-
 HELP_TEXT_6 = HELP_FONT.render("This Is You --->", True, BLACK)
-
 HELP_TITLE_FONT = pygame.font.SysFont("Bauhaus 93", 120)
 HELP_TITLE_1 = HELP_TITLE_FONT.render("HOW TO", True, DARK_RED)
 HELP_TITLE_2 = HELP_TITLE_FONT.render("PLAY", True, DARK_RED)
 
+help_virus = pygame.image.load("images/virus.png").convert_alpha()
+help_virus = pygame.transform.scale(help_virus, (UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT))
 #COLOUR SELECTION MENU 
 COLOUR_SELECTION_BUTTON_POS = [100, 650]
 COLOUR_SELECTION_BUTTON_SIZE = [250, 100]
@@ -266,11 +269,13 @@ COLOUR_SELECTION_BUTTON_FONT = pygame.font.SysFont("Aharoni", 60, False, False)
 COLOUR_SELECTION_BUTTON_TEXT_1 = COLOUR_SELECTION_BUTTON_FONT.render("CHANGE", True, CS_BUTTION_TEXT_COLOUR)
 COLOUR_SELECTION_BUTTON_TEXT_2 = COLOUR_SELECTION_BUTTON_FONT.render("COLOUR", True, CS_BUTTION_TEXT_COLOUR)
 
+#COLOUR SELECTION TEXT
 COLOUR_SELECTION_FONT = pygame.font.SysFont("Bauhaus 93", 120)
 COLOUR_SELECTION_TEXT_1 = COLOUR_SELECTION_FONT.render("Choose", True, DARK_RED)
 COLOUR_SELECTION_TEXT_2 = COLOUR_SELECTION_FONT.render("a Colour:", True, DARK_RED)
 COLOUR_SELECTION_ARROW = COLOUR_SELECTION_FONT.render("^", True, DARK_RED)
 
+#LOCATION OF COLOUR BUTTONS
 RED_COLOUR = [25, 400]
 YELLOW_COLOUR = [150,400]
 GREEN_COLOUR = [275, 400]
@@ -279,9 +284,6 @@ BLACK_COLOUR = [550, 400]
 WHITE_COLOUR = [675, 400]
 
 COLOUR_SELECTION_ARROW_POS = [RED_COLOUR[0] + 20, 475]
-
-help_virus = pygame.image.load("images/virus.png").convert_alpha()
-help_virus = pygame.transform.scale(help_virus, (UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT))
 
 PLAYER_COLOUR_PRIMARY = RED
 PLAYER_COLOUR_SECONDARY = LIGHT_GREY
@@ -311,7 +313,6 @@ while not DONE:
             DONE = True # Flag that we are DONE so we exit this loop
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            print(CURRENT_POS, CURRENT_VIRUS_POS)
             #Menu
             if SCENE == 0 and MENU_SCENE == 1:
 
@@ -735,7 +736,7 @@ while not DONE:
     # Draw the current level
         level_text = level_font.render("LEVEL: " + str(LEVEL), True, BLACK)
         screen.blit(level_text, (700, 30))
-        
+
         pygame.draw.rect(screen, PLAYER_COLOUR_PRIMARY, ((PLAYER_POS[0] * 50, PLAYER_POS[1] * 50), [UNIT_OF_MEASUREMENT,UNIT_OF_MEASUREMENT]))
         pygame.draw.rect(screen, PLAYER_COLOUR_SECONDARY, ((PLAYER_POS[0] * 50, PLAYER_POS[1] * 50), [UNIT_OF_MEASUREMENT, UNIT_OF_MEASUREMENT]), 2)
         screen.blit(virus, (VIRUS_POS[0] * 50, VIRUS_POS[1] * 50))
